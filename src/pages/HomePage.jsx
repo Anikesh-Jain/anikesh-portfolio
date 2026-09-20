@@ -4,6 +4,8 @@ import AboutSection from '../sections/AboutSection'
 import SkillsSection from '../sections/SkillsSection'
 import FeaturedProjectsSection from '../sections/FeaturedProjectsSection'
 import JourneySection from '../sections/JourneySection'
+import AchievementsSection from '../sections/AchievementsSection'
+import CreativePreviewSection from '../sections/CreativePreviewSection'
 import ExploreSection from '../sections/ExploreSection'
 import ContactSection from '../sections/ContactSection'
 
@@ -15,6 +17,8 @@ export default function HomePage() {
       <SkillsSection />
       <FeaturedProjectsSection />
       <JourneySection />
+      <AchievementsSection />
+      <CreativePreviewSection />
       <ExploreSection />
       <ContactSection />
     </div>

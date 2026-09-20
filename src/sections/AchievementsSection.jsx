@@ -57,7 +57,7 @@ export default function AchievementsSection() {
   )
 
   return (
-    <section id="achievements" className="section">
+    <section id="achievements" className="section shell">
       <div className="section-head mb-8">
         <div>
           <p className="eyebrow">

@@ -13,7 +13,7 @@ export default function CreativePreviewSection() {
   const previewItems = creativeItems.slice(0, 6)
 
   return (
-    <section id="creative" className="section">
+    <section id="creative" className="section shell">
       <div className="space-y-10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">

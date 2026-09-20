@@ -3,6 +3,27 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
+const SECTIONS = ['home', 'about', 'skills', 'projects', 'journey', 'achievements', 'creative', 'contact']
+
+const HOME_LINKS = [
+  { label: 'Home', href: '#home', id: 'home' },
+  { label: 'About', href: '#about', id: 'about' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Journey', href: '#journey', id: 'journey' },
+  { label: 'Achievements', href: '#achievements', id: 'achievements' },
+  { label: 'Creative', href: '#creative', id: 'creative' },
+  { label: 'Connect', href: '#contact', id: 'contact' },
+]
+
+const SUB_PAGE_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: 'Achievements', to: '/achievements' },
+  { label: 'Certificates', to: '/certificates' },
+  { label: 'Creative', to: '/creative' },
+  { label: 'Involvement', to: '/involvement' },
+]
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -12,20 +33,68 @@ export default function Navbar() {
   const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev)
   const closeMobileMenu = () => setMobileMenuOpen(false)
 
+  // Handle hash scrolling and initial active section
+  useEffect(() => {
+    if (!isHome) return
+
+    const handleHash = () => {
+      const hash = window.location.hash.slice(1)
+      if (hash && SECTIONS.includes(hash)) {
+        setActiveSection(hash)
+        const el = document.getElementById(hash)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      } else if (!hash) {
+        if (window.scrollY < 80) {
+          setActiveSection('home')
+        }
+      }
+    }
+
+    // Check on initial load
+    if (window.location.hash) {
+      const timer = setTimeout(handleHash, 80)
+      return () => clearTimeout(timer)
+    }
+
+    // Listen to browser Back/Forward navigation
+    window.addEventListener('hashchange', handleHash)
+    window.addEventListener('popstate', handleHash)
+    return () => {
+      window.removeEventListener('hashchange', handleHash)
+      window.removeEventListener('popstate', handleHash)
+    }
+  }, [isHome])
+
   // Track active section on scroll for homepage
   useEffect(() => {
     if (!isHome) return
 
-    const sections = ['home', 'about', 'skills', 'projects', 'journey', 'contact']
-
     const handleScroll = () => {
-      const scrollY = window.scrollY + 140
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i])
+      // Top of page is always Home
+      if (window.scrollY < 80) {
+        setActiveSection('home')
+        return
+      }
+
+      // Bottom of page is always Connect
+      const scrollBottom = window.innerHeight + window.scrollY
+      const pageHeight = document.documentElement.scrollHeight
+      if (scrollBottom >= pageHeight - 60) {
+        setActiveSection('contact')
+        return
+      }
+
+      // Dynamic viewport reading threshold (around 30% down the screen)
+      const threshold = Math.max(140, Math.min(260, window.innerHeight * 0.35))
+
+      for (let i = SECTIONS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(SECTIONS[i])
         if (el) {
-          const top = el.offsetTop
-          if (scrollY >= top) {
-            setActiveSection(sections[i])
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= threshold) {
+            setActiveSection(SECTIONS[i])
             return
           }
         }
@@ -38,28 +107,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isHome])
 
-  const homeLinks = [
-    { label: 'Home', href: '#home', type: 'hash', id: 'home' },
-    { label: 'About', href: '#about', type: 'hash', id: 'about' },
-    { label: 'Skills', href: '#skills', type: 'hash', id: 'skills' },
-    { label: 'Projects', href: '#projects', type: 'hash', id: 'projects' },
-    { label: 'Journey', href: '#journey', type: 'hash', id: 'journey' },
-    { label: 'Achievements', to: '/achievements', type: 'route' },
-    { label: 'Creative', to: '/creative', type: 'route' },
-    { label: 'Connect', href: '#contact', type: 'hash', id: 'contact' },
-  ]
-
-  const subPageLinks = [
-    { label: 'Home', to: '/' },
-    { label: 'Achievements', to: '/achievements' },
-    { label: 'Certificates', to: '/certificates' },
-    { label: 'Creative', to: '/creative' },
-    { label: 'Involvement', to: '/involvement' },
-  ]
-
   const handleAnchorClick = (e, targetId) => {
     e.preventDefault()
     closeMobileMenu()
+    setActiveSection(targetId)
     const el = document.getElementById(targetId)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
@@ -85,18 +136,7 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-7 h-full">
           {isHome ? (
-            homeLinks.map(link => {
-              if (link.type === 'route') {
-                return (
-                  <Link
-                    key={link.label}
-                    to={link.to}
-                    className="text-[13px] font-bold tracking-[0.1px] text-[#bcbac9] hover:text-white transition-colors relative h-full flex items-center whitespace-nowrap"
-                  >
-                    {link.label}
-                  </Link>
-                )
-              }
+            HOME_LINKS.map(link => {
               const isActive = activeSection === link.id
               return (
                 <a
@@ -119,7 +159,7 @@ export default function Navbar() {
               )
             })
           ) : (
-            subPageLinks.map(link => {
+            SUB_PAGE_LINKS.map(link => {
               const isActive = location.pathname === link.to
               return (
                 <Link
@@ -168,20 +208,7 @@ export default function Navbar() {
           >
             <div className="flex flex-col gap-1 py-1">
               {isHome ? (
-                homeLinks.map(link => {
-                  if (link.type === 'route') {
-                    return (
-                      <Link
-                        key={link.label}
-                        to={link.to}
-                        onClick={closeMobileMenu}
-                        className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-colors text-[#bcbac9] hover:text-white hover:bg-[#10121f]"
-                      >
-                        <span>{link.label}</span>
-                        <span className="text-xs text-[#b16cff]">↗</span>
-                      </Link>
-                    )
-                  }
+                HOME_LINKS.map(link => {
                   const isActive = activeSection === link.id
                   return (
                     <a
@@ -200,7 +227,7 @@ export default function Navbar() {
                   )
                 })
               ) : (
-                subPageLinks.map(link => {
+                SUB_PAGE_LINKS.map(link => {
                   const isActive = location.pathname === link.to
                   return (
                     <Link
