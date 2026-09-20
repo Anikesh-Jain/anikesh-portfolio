@@ -1,0 +1,157 @@
+/* ─── Design Tokens — Matched from old portfolio ─── */
+:root {
+  --bg: #070912;
+  --panel: #10121f;
+  --panel2: #0c0e18;
+  --line: #292d42;
+  --text: #f4f3f8;
+  --muted: #9998aa;
+  --purple: #b16cff;
+  --purple2: #7040df;
+
+  /* Secondary accents */
+  --accent-pink: #ff5fa2;
+  --accent-cyan: #49c7ff;
+  --accent-gold: #f4be57;
+  --accent-green: #57d39b;
+}
+
+/* ─── Tailwind v4 Theme ─── */
+@theme {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel2: var(--panel2);
+  --color-line: var(--line);
+  --color-foreground: var(--text);
+  --color-muted: var(--muted);
+  --color-purple: var(--purple);
+  --color-purple2: var(--purple2);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-green: var(--accent-green);
+  --font-sans: 'Manrope', Arial, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+/* ─── Base Body ─── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', Arial, sans-serif;
+  overflow-x: hidden;
+  padding-top: 78px;
+}
+
+/* Dual-radial ambient glow — matches old portfolio exactly */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 85% 0, rgba(120, 67, 255, .17), transparent 62%),
+    radial-gradient(700px 550px at 5% 100%, rgba(174, 76, 255, .11), transparent 68%),
+    var(--bg);
+}
+
+/* 50px grid overlay — matches old portfolio */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(#000, transparent 88%);
+}
+
+/* ─── Gradient Text Utilities ─── */
+.gradient {
+  background: linear-gradient(100deg, #fff 0, #dfa9ff 48%, #7d58ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(100deg, #fff 0, #dfa9ff 48%, #7d58ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-multi {
+  background: linear-gradient(90deg, var(--accent-pink), #b16cff, var(--accent-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ─── Eyebrow Label ─── */
+.eyebrow {
+  font: 500 10px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  color: #cfb8ec;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--purple);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--purple);
+  flex-shrink: 0;
+}
+
+/* ─── Panel Base ─── */
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(14, 16, 28, .8);
+}
+
+/* ─── Reveal Animation (Framer Motion will handle this, but base state) ─── */
+.reveal-base {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3d4060;
+}
