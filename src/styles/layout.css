@@ -41,8 +41,24 @@ section[id] {
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
+  .shell {
+    width: min(1380px, calc(100% - 32px));
+  }
+
   .section {
-    padding: 55px 0;
+    padding: 50px 0;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(28px, 6.5vw, 36px);
+    letter-spacing: -1.2px;
   }
 }

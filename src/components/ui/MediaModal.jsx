@@ -42,7 +42,7 @@ export default function MediaModal({ isOpen, onClose, media }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -61,19 +61,19 @@ export default function MediaModal({ isOpen, onClose, media }) {
           className="relative z-10 w-full max-w-4xl bg-[#0d1120] border border-[#1e243b] rounded-xl shadow-2xl overflow-hidden my-auto"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-[#1e243b] bg-[#090d16]">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between px-3.5 sm:px-6 py-3 border-b border-[#1e243b] bg-[#090d16] gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 overflow-hidden">
               {media.category && (
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-medium uppercase tracking-wider bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <span className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono font-medium uppercase tracking-wider bg-purple-500/10 text-purple-400 border border-purple-500/20 shrink-0">
                   {media.category}
                 </span>
               )}
-              <h3 className="text-sm sm:text-base font-semibold text-foreground truncate max-w-md">
+              <h3 className="text-xs sm:text-base font-semibold text-foreground truncate">
                 {media.title}
               </h3>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <a
                 href={media.src || media.image}
                 target="_blank"
@@ -97,7 +97,7 @@ export default function MediaModal({ isOpen, onClose, media }) {
           </div>
 
           {/* Media Body */}
-          <div className="p-3 sm:p-6 bg-[#070912]/80 flex flex-col items-center justify-center min-h-[250px] max-h-[75vh] overflow-auto">
+          <div className="p-2.5 sm:p-6 bg-[#070912]/80 flex flex-col items-center justify-center min-h-[220px] max-h-[75vh] overflow-auto">
             {media.isVideo ? (
               <video
                 src={media.src}
@@ -106,24 +106,24 @@ export default function MediaModal({ isOpen, onClose, media }) {
                 className="max-h-[60vh] max-w-full rounded-lg object-contain shadow-lg"
               />
             ) : isPdf ? (
-              <div className="w-full flex flex-col items-center gap-4 py-2">
-                <div className="w-full h-[55vh] rounded-lg overflow-hidden border border-[#292d42] bg-[#0c0e18]">
+              <div className="w-full flex flex-col items-center gap-3 py-1">
+                <div className="w-full h-[50vh] sm:h-[55vh] rounded-lg overflow-hidden border border-[#292d42] bg-[#0c0e18]">
                   <iframe
                     src={`${media.src}#toolbar=1&navpanes=0`}
                     title={media.title || 'PDF Preview'}
                     className="w-full h-full border-0"
                   />
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-full">
                   <a
                     href={media.src}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleAssetClick(media.src, true)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#a564f0] to-[#6639cf] hover:opacity-90 shadow-lg shadow-purple-900/30 transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-[#a564f0] to-[#6639cf] hover:opacity-90 shadow-lg shadow-purple-900/30 transition-all text-center max-w-full"
                   >
-                    <FileText className="w-4 h-4" />
-                    Open Full PDF Document In New Tab ↗
+                    <FileText className="w-4 h-4 shrink-0" />
+                    <span>Open Full PDF Document In New Tab ↗</span>
                   </a>
                 </div>
               </div>

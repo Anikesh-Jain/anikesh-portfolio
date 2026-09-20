@@ -8,6 +8,7 @@ import { trackGithubClick, trackProjectDetailView } from '../utils/analytics'
 function ProjectScreenshotSlideshow({ screenshots, title, slug, to }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [loadedIndices, setLoadedIndices] = useState(() => new Set([0]))
 
   const items = screenshots && screenshots.length > 0 ? screenshots : []
 
@@ -15,7 +16,16 @@ function ProjectScreenshotSlideshow({ screenshots, title, slug, to }) {
     if (isPaused || items.length <= 1) return
 
     const timer = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % items.length)
+      setCurrentIndex(prev => {
+        const next = (prev + 1) % items.length
+        setLoadedIndices(loaded => {
+          const updated = new Set(loaded)
+          updated.add(next)
+          updated.add((next + 1) % items.length)
+          return updated
+        })
+        return next
+      })
     }, 3800)
 
     return () => clearInterval(timer)
@@ -32,6 +42,9 @@ function ProjectScreenshotSlideshow({ screenshots, title, slug, to }) {
     >
       {items.map((shot, idx) => {
         const isActive = idx === currentIndex
+        const isLoaded = loadedIndices.has(idx)
+        if (!isLoaded && !isActive) return null
+
         const src = typeof shot === 'string' ? shot : shot.src
         const shotTitle = typeof shot === 'string' ? `${title} Screenshot ${idx + 1}` : shot.title
 

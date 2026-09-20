@@ -320,12 +320,18 @@ export default function HeroOrbitalArt() {
 
       {/* Upright Center Portrait Frame */}
       <div className="hero-portrait-frame">
-        <img
-          src={siteConfig.profilePhoto}
-          alt={siteConfig.name}
-          loading="eager"
-          className="hero-portrait-img"
-        />
+        <picture>
+          <source srcSet="/assets/profile/anikesh-jain.webp" type="image/webp" />
+          <img
+            src={siteConfig.profilePhoto}
+            alt={siteConfig.name}
+            loading="eager"
+            fetchPriority="high"
+            width="255"
+            height="355"
+            className="hero-portrait-img"
+          />
+        </picture>
         <div className="portrait-inner-glass" aria-hidden="true" />
       </div>
 

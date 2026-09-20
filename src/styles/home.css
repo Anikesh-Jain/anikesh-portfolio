@@ -1536,7 +1536,7 @@
 .journey-bg {
   position: absolute;
   inset: 0;
-  background: url('/assets/journey-cosmic-bg.jpg') center center / cover no-repeat;
+  background: url('/assets/journey-cosmic-bg.webp') center center / cover no-repeat;
   z-index: 0;
 }
 
@@ -2427,7 +2427,7 @@
 .explore-bg {
   position: absolute;
   inset: 0;
-  background: url('/assets/explore-space-bg.jpg') center 30% / cover no-repeat;
+  background: url('/assets/explore-space-bg.webp') center 30% / cover no-repeat;
   z-index: 0;
   opacity: 0.85;
 }
@@ -2967,17 +2967,29 @@
   }
 
   .hero-art {
-    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px auto 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-orbital-stage {
     transform: scale(0.85);
     transform-origin: center center;
-    max-width: 100%;
+    flex-shrink: 0;
   }
 
   .home-about-layout,
   .skills-intro {
     grid-template-columns: 1fr;
     gap: 35px;
+  }
+
+  .home-about-section::before {
+    left: 0;
+    right: 0;
   }
 
   .about-identity-card {
@@ -3051,72 +3063,154 @@
 }
 
 @media (max-width: 640px) {
+  .home-hero {
+    gap: 28px;
+  }
+
+  .home-hero::after {
+    display: none;
+  }
+
   .hero-art {
-    transform: scale(0.64);
-    transform-origin: center center;
     margin: 0 auto;
-    height: 460px;
+    height: clamp(330px, 80vw, 440px);
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-orbital-stage {
+    transform: scale(clamp(0.46, calc((100vw - 36px) / 620), 0.68));
+    transform-origin: center center;
+    flex-shrink: 0;
   }
 
   .actions {
     gap: 12px;
+    width: 100%;
+  }
+
+  .actions .btn {
+    flex: 1 1 140px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .social-row {
+    gap: 6px;
+  }
+
+  .social-row a {
+    padding: 7px 10px;
+    font-size: 10.5px;
   }
 
   .about-statements {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .about-identity-card {
-    min-height: 470px;
-    padding: 20px 12px 18px;
+    min-height: auto;
+    padding: 18px 12px;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .mern-system-wrapper {
-    transform: scale(0.85);
+    transform: scale(clamp(0.72, calc((100vw - 72px) / 300), 0.88));
     transform-origin: center center;
     margin: 4px auto;
   }
 
+  .concept-row {
+    width: 100%;
+    padding: 0 4px;
+  }
+
   .concept-badge {
-    padding: 5px 10px;
+    padding: 5px 8px;
     font-size: 10px;
+    gap: 5px;
+  }
+
+  .home-tech-item {
+    touch-action: pan-y;
+  }
+
+  .home-tech-items {
+    grid-template-columns: 1fr;
   }
 
   .projects {
     grid-template-columns: 1fr;
   }
 
+  .project .preview {
+    height: clamp(200px, 56vw, 260px);
+  }
+
   /* Journey mobile */
   .journey-container {
-    padding: 24px 20px 32px;
+    padding: 24px 16px 28px;
     min-height: auto;
+    overflow: hidden;
   }
 
   .journey-title {
     font-size: 28px;
   }
 
-  .journey-rocket-wrapper,
   .journey-rocket-canvas {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 130px;
+    margin: -10px 0 10px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .journey-rocket-wrapper {
     display: none;
   }
 
   .timeline {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
+    position: relative;
+  }
+
+  /* Subtle vertical progress track connecting nodes */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 27px;
+    top: 26px;
+    bottom: 26px;
+    width: 2px;
+    background: linear-gradient(180deg, #f4be57, #b16cff 40%, #ff5fa2 70%, #49c7ff);
+    box-shadow: 0 0 8px rgba(177, 108, 255, 0.5);
+    z-index: 1;
+    border-radius: 999px;
   }
 
   .milestone {
     display: grid;
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: 56px 1fr;
     text-align: left;
     gap: 0 14px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
   }
 
   .node {
     grid-row: span 2;
     width: 56px;
     height: 56px;
+    margin: 0;
   }
 
   .node-icon svg {
@@ -3137,7 +3231,7 @@
 
   /* Explore mobile */
   .explore-container {
-    padding: 24px 20px 32px;
+    padding: 24px 16px 28px;
     min-height: auto;
   }
 
@@ -3147,22 +3241,32 @@
 
   .explore {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .explore-card {
+    padding: 28px 18px 24px;
   }
 
   .home-about-section::before {
-    left: -3vw;
-    right: -3vw;
-    border-radius: 22px;
-    top: 10px;
-    bottom: 10px;
+    left: 0;
+    right: 0;
+    border-radius: 18px;
+    top: 6px;
+    bottom: 6px;
   }
 
   .contact-panel {
-    padding: 24px;
+    padding: 24px 16px;
+    gap: 28px;
   }
 
-  .home-tech-items {
-    grid-template-columns: 1fr;
+  .contact-meta div {
+    grid-template-columns: 75px 1fr;
+    gap: 8px;
+    font-size: 11.5px;
+    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 }
 

@@ -35,9 +35,15 @@
 }
 
 /* ─── Base Body ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -46,6 +52,8 @@ body {
   color: var(--text);
   font-family: 'Manrope', Arial, sans-serif;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
   padding-top: 78px;
 }
 

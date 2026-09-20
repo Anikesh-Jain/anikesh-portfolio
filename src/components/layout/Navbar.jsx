@@ -74,10 +74,10 @@ export default function Navbar() {
         <Link
           to="/"
           onClick={closeMobileMenu}
-          className="flex items-center gap-2.5 text-white no-underline font-extrabold tracking-[0.7px] text-sm group"
+          className="flex items-center gap-2 text-white no-underline font-extrabold tracking-[0.7px] text-xs sm:text-sm shrink-0 group"
         >
-          <span className="code-logo">&lt;A/J&gt;</span>
-          <span className="text-[#f4f3f8]">
+          <span className="code-logo text-[11px] sm:text-xs py-1 px-2 sm:px-2.5">&lt;A/J&gt;</span>
+          <span className="text-[#f4f3f8] whitespace-nowrap">
             ANIKESH <b className="text-[#b16cff]">JAIN</b>
           </span>
         </Link>
@@ -144,7 +144,7 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center md:hidden shrink-0">
           <button
             type="button"
             onClick={toggleMobileMenu}
@@ -164,9 +164,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-b border-[#292d42] bg-[#070912]/98 backdrop-blur-2xl px-6 py-4 shadow-2xl"
+            className="md:hidden border-b border-[#292d42] bg-[#070912]/98 backdrop-blur-2xl px-4 py-3 shadow-2xl max-h-[calc(100vh-80px)] overflow-y-auto"
           >
-            <div className="flex flex-wrap gap-2 justify-center py-2">
+            <div className="flex flex-col gap-1 py-1">
               {isHome ? (
                 homeLinks.map(link => {
                   if (link.type === 'route') {
@@ -175,42 +175,49 @@ export default function Navbar() {
                         key={link.label}
                         to={link.to}
                         onClick={closeMobileMenu}
-                        className="px-3 py-2 rounded-md text-[13px] font-bold transition-colors text-[#bcbac9] hover:text-white hover:bg-[#10121f]"
+                        className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-colors text-[#bcbac9] hover:text-white hover:bg-[#10121f]"
                       >
-                        {link.label}
+                        <span>{link.label}</span>
+                        <span className="text-xs text-[#b16cff]">↗</span>
                       </Link>
                     )
                   }
+                  const isActive = activeSection === link.id
                   return (
                     <a
                       key={link.id}
                       href={link.href}
                       onClick={(e) => handleAnchorClick(e, link.id)}
-                      className={`px-3 py-2 rounded-md text-[13px] font-bold transition-colors ${
-                        activeSection === link.id
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                        isActive
                           ? 'text-white bg-[#b16cff]/20 border border-[#b16cff]/40'
                           : 'text-[#bcbac9] hover:text-white hover:bg-[#10121f]'
                       }`}
                     >
-                      {link.label}
+                      <span>{link.label}</span>
+                      {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#b16cff] shadow-[0_0_8px_#b16cff]" />}
                     </a>
                   )
                 })
               ) : (
-                subPageLinks.map(link => (
-                  <Link
-                    key={link.label}
-                    to={link.to}
-                    onClick={closeMobileMenu}
-                    className={`px-3 py-2 rounded-md text-[13px] font-bold transition-colors ${
-                      location.pathname === link.to
-                        ? 'text-white bg-[#b16cff]/20 border border-[#b16cff]/40'
-                        : 'text-[#bcbac9] hover:text-white hover:bg-[#10121f]'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))
+                subPageLinks.map(link => {
+                  const isActive = location.pathname === link.to
+                  return (
+                    <Link
+                      key={link.label}
+                      to={link.to}
+                      onClick={closeMobileMenu}
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                        isActive
+                          ? 'text-white bg-[#b16cff]/20 border border-[#b16cff]/40'
+                          : 'text-[#bcbac9] hover:text-white hover:bg-[#10121f]'
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#b16cff] shadow-[0_0_8px_#b16cff]" />}
+                    </Link>
+                  )
+                })
               )}
             </div>
           </motion.div>

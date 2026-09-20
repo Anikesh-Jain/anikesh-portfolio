@@ -9,21 +9,21 @@ export default function Pagination({
 }) {
   if (totalPages <= 1) return null
 
-  // Generate page numbers with smart ellipsis for larger archives
+  // Generate page numbers with smart ellipsis for compact mobile & desktop fit
   const getPageNumbers = () => {
-    if (totalPages <= 7) {
+    if (totalPages <= 5) {
       return Array.from({ length: totalPages }, (_, i) => i + 1)
     }
 
-    if (currentPage <= 4) {
-      return [1, 2, 3, 4, 5, '...', totalPages]
+    if (currentPage <= 2) {
+      return [1, 2, 3, '...', totalPages]
     }
 
-    if (currentPage >= totalPages - 3) {
-      return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
+    if (currentPage >= totalPages - 1) {
+      return [1, '...', totalPages - 2, totalPages - 1, totalPages]
     }
 
-    return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages]
+    return [1, '...', currentPage, '...', totalPages]
   }
 
   const pages = getPageNumbers()
@@ -31,7 +31,7 @@ export default function Pagination({
   return (
     <nav
       aria-label="Pagination Navigation"
-      className={`flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap select-none pt-6 sm:pt-8 ${className}`}
+      className={`flex items-center justify-center gap-1 sm:gap-2 flex-wrap select-none pt-6 sm:pt-8 ${className}`}
     >
       {/* Previous Button */}
       <button
@@ -39,14 +39,14 @@ export default function Pagination({
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         aria-disabled={currentPage === 1}
-        className={`h-10 sm:h-11 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-1 sm:gap-1.5 border ${
+        className={`h-9 sm:h-11 px-2.5 sm:px-4 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-1 sm:gap-1.5 border shrink-0 ${
           currentPage === 1
             ? 'opacity-35 cursor-not-allowed text-[#666578] border-[#1d2030] bg-[#0a0c16]'
             : 'bg-[#10121f] text-[#e0deea] border-[#292d42] hover:text-white hover:border-[#b16cff]/50 hover:bg-[#15182c]'
         }`}
       >
         <ChevronLeft className="w-4 h-4" />
-        <span className="hidden min-[400px]:inline">Previous</span>
+        <span className="hidden min-[480px]:inline">Previous</span>
       </button>
 
       {/* Page Numbers */}
@@ -56,7 +56,7 @@ export default function Pagination({
             return (
               <span
                 key={`ellipsis-${idx}`}
-                className="w-8 h-10 sm:h-11 flex items-center justify-center text-[#706e82] text-xs font-mono"
+                className="w-6 sm:w-8 h-9 sm:h-11 flex items-center justify-center text-[#706e82] text-xs font-mono"
               >
                 ...
               </span>
@@ -71,7 +71,7 @@ export default function Pagination({
               type="button"
               onClick={() => onPageChange(page)}
               aria-current={isActive ? 'page' : undefined}
-              className={`min-w-[38px] sm:min-w-[42px] h-10 sm:h-11 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-mono font-medium transition-all flex items-center justify-center border ${
+              className={`min-w-[34px] sm:min-w-[42px] h-9 sm:h-11 px-2 sm:px-3 rounded-xl text-xs sm:text-sm font-mono font-medium transition-all flex items-center justify-center border shrink-0 ${
                 isActive
                   ? 'bg-[#b16cff] text-white font-bold border-[#b16cff] shadow-lg shadow-purple-950/40'
                   : 'bg-[#10121f] text-[#9998aa] border-[#292d42] hover:text-white hover:border-[#b16cff]/40 hover:bg-[#15182c]'
@@ -89,15 +89,16 @@ export default function Pagination({
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         aria-disabled={currentPage === totalPages}
-        className={`h-10 sm:h-11 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-1 sm:gap-1.5 border ${
+        className={`h-9 sm:h-11 px-2.5 sm:px-4 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-1 sm:gap-1.5 border shrink-0 ${
           currentPage === totalPages
             ? 'opacity-35 cursor-not-allowed text-[#666578] border-[#1d2030] bg-[#0a0c16]'
             : 'bg-[#10121f] text-[#e0deea] border-[#292d42] hover:text-white hover:border-[#b16cff]/50 hover:bg-[#15182c]'
         }`}
       >
-        <span className="hidden min-[400px]:inline">Next</span>
+        <span className="hidden min-[480px]:inline">Next</span>
         <ChevronRight className="w-4 h-4" />
       </button>
     </nav>
   )
+
 }

@@ -146,6 +146,40 @@
   .footer-links { justify-content: flex-start; }
 }
 
-@media (max-width: 620px) {
-  .footer-bottom { flex-direction: column; gap: 8px; }
+@media (max-width: 640px) {
+  .portfolio-footer {
+    margin-top: 60px;
+  }
+  .footer-main {
+    padding: 36px 0;
+    gap: 32px;
+  }
+  .footer-identity {
+    gap: 14px;
+  }
+  .footer-logo {
+    font-size: 18px;
+    padding: 10px 12px;
+  }
+  .footer-name {
+    font-size: 18px;
+  }
+  .footer-cta h2 {
+    font-size: clamp(24px, 5.5vw, 32px);
+    letter-spacing: -1.2px;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-links a {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    padding: 16px 0 24px;
+  }
 }
