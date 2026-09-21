@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-const SECTIONS = ['home', 'about', 'skills', 'projects', 'journey', 'achievements', 'creative', 'contact']
+const SECTIONS = ['home', 'about', 'skills', 'projects', 'journey', 'contact']
 
 const HOME_LINKS = [
   { label: 'Home', href: '#home', id: 'home' },
@@ -11,8 +11,8 @@ const HOME_LINKS = [
   { label: 'Skills', href: '#skills', id: 'skills' },
   { label: 'Projects', href: '#projects', id: 'projects' },
   { label: 'Journey', href: '#journey', id: 'journey' },
-  { label: 'Achievements', href: '#achievements', id: 'achievements' },
-  { label: 'Creative', href: '#creative', id: 'creative' },
+  { label: 'Achievements', to: '/achievements' },
+  { label: 'Creative', to: '/creative' },
   { label: 'Connect', href: '#contact', id: 'contact' },
 ]
 
@@ -137,6 +137,19 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-6 lg:gap-7 h-full">
           {isHome ? (
             HOME_LINKS.map(link => {
+              // Dedicated page links (Achievements, Creative) use route navigation
+              if (link.to) {
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    className="text-[13px] font-bold tracking-[0.1px] transition-colors relative h-full flex items-center whitespace-nowrap text-[#bcbac9] hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              }
+              // Homepage section links use anchor scrolling
               const isActive = activeSection === link.id
               return (
                 <a
@@ -209,6 +222,20 @@ export default function Navbar() {
             <div className="flex flex-col gap-1 py-1">
               {isHome ? (
                 HOME_LINKS.map(link => {
+                  // Dedicated page links (Achievements, Creative) use route navigation
+                  if (link.to) {
+                    return (
+                      <Link
+                        key={link.label}
+                        to={link.to}
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-semibold transition-colors text-[#bcbac9] hover:text-white hover:bg-[#10121f]"
+                      >
+                        <span>{link.label}</span>
+                      </Link>
+                    )
+                  }
+                  // Homepage section links use anchor scrolling
                   const isActive = activeSection === link.id
                   return (
                     <a
