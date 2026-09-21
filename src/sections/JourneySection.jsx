@@ -206,76 +206,78 @@ export default function JourneySection() {
                 </animateMotion>
               )}
 
-              {/* Rocket & streaming exhaust oriented so nose aligns with path tangent, scaled for clear visibility */}
-              <g transform="rotate(90) scale(1.65) translate(-30, -30)">
-                {/* Permanent Ambient Rocket Glow */}
-                <circle cx="30" cy="30" r="42" fill="url(#rocketGlowGrad)" />
+              {/* Rocket & streaming exhaust oriented so nose aligns with path tangent */}
+              <g transform="rotate(90) translate(-30, -30)">
+                <g className="journey-rocket-scale-group">
+                  {/* Permanent Ambient Rocket Glow */}
+                  <circle cx="30" cy="30" r="42" fill="url(#rocketGlowGrad)" />
 
-                {/* Thin, gently curving continuous rocket exhaust contrail */}
-                <g className="journey-rocket-swoosh-group">
-                  {/* Outer flowing plume — thin contrail, straight for most of length, then gentle upward curve */}
-                  <path
-                    d="M 27.5 50 C 28 80, 28.5 115, 28.8 140 C 28.9 155, 27 172, 21 185 C 19 189, 16.5 193, 14 195 C 17 192, 20.5 186, 23 181 C 29.5 168, 31.2 153, 31.2 140 C 31.5 115, 32 80, 32.5 50 Z"
-                    fill="url(#swooshOuterGrad)"
-                    filter="url(#swooshGlowFilter)"
-                    className="flowing-flame-plume"
-                  />
-                  {/* Inner hot plasma core */}
-                  <path
-                    d="M 28.5 50 C 28.8 75, 29.2 105, 29.4 125 C 29.5 140, 28 155, 24 167 C 22 171, 20 174, 18 175 C 20 173, 22.5 169, 25 164 C 29 152, 30.5 138, 30.6 125 C 30.8 105, 31.2 75, 31.5 50 Z"
-                    fill="url(#swooshCoreGrad)"
-                    className="flowing-flame-core"
-                  />
-                  {/* Aerodynamic streamline whisker */}
-                  <path
-                    d="M 27 54 C 27.5 85, 27.8 120, 26 145 C 24.5 162, 19 178, 11 188"
-                    fill="none"
-                    stroke="url(#swooshCoreGrad)"
-                    strokeWidth="0.75"
-                    strokeOpacity="0.6"
-                    strokeDasharray="16 6"
-                    className="flowing-flame-streamline"
-                  />
+                  {/* Thin, gently curving continuous rocket exhaust contrail */}
+                  <g className="journey-rocket-swoosh-group">
+                    {/* Outer flowing plume — thin contrail, straight for most of length, then gentle upward curve */}
+                    <path
+                      d="M 27.5 50 C 28 80, 28.5 115, 28.8 140 C 28.9 155, 27 172, 21 185 C 19 189, 16.5 193, 14 195 C 17 192, 20.5 186, 23 181 C 29.5 168, 31.2 153, 31.2 140 C 31.5 115, 32 80, 32.5 50 Z"
+                      fill="url(#swooshOuterGrad)"
+                      filter="url(#swooshGlowFilter)"
+                      className="flowing-flame-plume"
+                    />
+                    {/* Inner hot plasma core */}
+                    <path
+                      d="M 28.5 50 C 28.8 75, 29.2 105, 29.4 125 C 29.5 140, 28 155, 24 167 C 22 171, 20 174, 18 175 C 20 173, 22.5 169, 25 164 C 29 152, 30.5 138, 30.6 125 C 30.8 105, 31.2 75, 31.5 50 Z"
+                      fill="url(#swooshCoreGrad)"
+                      className="flowing-flame-core"
+                    />
+                    {/* Aerodynamic streamline whisker */}
+                    <path
+                      d="M 27 54 C 27.5 85, 27.8 120, 26 145 C 24.5 162, 19 178, 11 188"
+                      fill="none"
+                      stroke="url(#swooshCoreGrad)"
+                      strokeWidth="0.75"
+                      strokeOpacity="0.6"
+                      strokeDasharray="16 6"
+                      className="flowing-flame-streamline"
+                    />
 
-                  {/* Continuous backward streaming plasma particles from nozzle */}
-                  <g className="swoosh-stream-sparks">
-                    <circle cx="30" cy="55" r="1.6" fill="#ffffff">
-                      <animate attributeName="cy" values="55; 95; 140; 185" dur="0.45s" repeatCount="indefinite" />
-                      <animate attributeName="cx" values="30; 29.5; 26; 16" dur="0.45s" repeatCount="indefinite" />
-                      <animate attributeName="r" values="1.8; 1.3; 0.8; 0.2" dur="0.45s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="1; 0.8; 0.4; 0" dur="0.45s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="29" cy="55" r="1.3" fill="#49c7ff">
-                      <animate attributeName="cy" values="55; 90; 130; 175" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
-                      <animate attributeName="cx" values="29; 29; 27; 18" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
-                      <animate attributeName="r" values="1.5; 1.1; 0.6; 0.2" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="1; 0.75; 0.35; 0" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="31" cy="55" r="1.2" fill="#c084fc">
-                      <animate attributeName="cy" values="55; 100; 145; 190" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
-                      <animate attributeName="cx" values="31; 30; 25; 15" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
-                      <animate attributeName="r" values="1.4; 1.0; 0.5; 0.1" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
-                      <animate attributeName="opacity" values="1; 0.7; 0.3; 0" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
-                    </circle>
+                    {/* Continuous backward streaming plasma particles from nozzle */}
+                    <g className="swoosh-stream-sparks">
+                      <circle cx="30" cy="55" r="1.6" fill="#ffffff">
+                        <animate attributeName="cy" values="55; 95; 140; 185" dur="0.45s" repeatCount="indefinite" />
+                        <animate attributeName="cx" values="30; 29.5; 26; 16" dur="0.45s" repeatCount="indefinite" />
+                        <animate attributeName="r" values="1.8; 1.3; 0.8; 0.2" dur="0.45s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="1; 0.8; 0.4; 0" dur="0.45s" repeatCount="indefinite" />
+                      </circle>
+                      <circle cx="29" cy="55" r="1.3" fill="#49c7ff">
+                        <animate attributeName="cy" values="55; 90; 130; 175" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
+                        <animate attributeName="cx" values="29; 29; 27; 18" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
+                        <animate attributeName="r" values="1.5; 1.1; 0.6; 0.2" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="1; 0.75; 0.35; 0" dur="0.38s" begin="0.12s" repeatCount="indefinite" />
+                      </circle>
+                      <circle cx="31" cy="55" r="1.2" fill="#c084fc">
+                        <animate attributeName="cy" values="55; 100; 145; 190" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
+                        <animate attributeName="cx" values="31; 30; 25; 15" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
+                        <animate attributeName="r" values="1.4; 1.0; 0.5; 0.1" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="1; 0.7; 0.3; 0" dur="0.52s" begin="0.22s" repeatCount="indefinite" />
+                      </circle>
+                    </g>
                   </g>
-                </g>
 
-                {/* Exact Rocket SVG paths preserved without any changes */}
-                <g className="journey-rocket-craft">
-                  {/* Body */}
-                  <path
-                    d="M30 5 C30 5, 42 18, 42 35 C42 42, 38 48, 30 50 C22 48, 18 42, 18 35 C18 18, 30 5, 30 5Z"
-                    fill="url(#rocketBody)"
-                  />
-                  {/* Window */}
-                  <circle cx="30" cy="24" r="5.5" fill="url(#rocketWindow)" />
-                  <circle cx="30" cy="24" r="4" fill="#0d1025" opacity="0.5" />
-                  {/* Fins */}
-                  <path d="M18 36 C18 36, 10 42, 12 48 L18 44Z" fill="#9060d0" />
-                  <path d="M42 36 C42 36, 50 42, 48 48 L42 44Z" fill="#9060d0" />
-                  {/* Flame */}
-                  <path d="M26 49 C26 49, 30 58, 30 58 C30 58, 34 49, 34 49" fill="#ff8844" opacity="0.9" />
-                  <path d="M28 49 C28 49, 30 55, 30 55 C30 52, 32 49, 32 49" fill="#ffcc44" opacity="0.9" />
+                  {/* Exact Rocket SVG paths preserved without any changes */}
+                  <g className="journey-rocket-craft">
+                    {/* Body */}
+                    <path
+                      d="M30 5 C30 5, 42 18, 42 35 C42 42, 38 48, 30 50 C22 48, 18 42, 18 35 C18 18, 30 5, 30 5Z"
+                      fill="url(#rocketBody)"
+                    />
+                    {/* Window */}
+                    <circle cx="30" cy="24" r="5.5" fill="url(#rocketWindow)" />
+                    <circle cx="30" cy="24" r="4" fill="#0d1025" opacity="0.5" />
+                    {/* Fins */}
+                    <path d="M18 36 C18 36, 10 42, 12 48 L18 44Z" fill="#9060d0" />
+                    <path d="M42 36 C42 36, 50 42, 48 48 L42 44Z" fill="#9060d0" />
+                    {/* Flame */}
+                    <path d="M26 49 C26 49, 30 58, 30 58 C30 58, 34 49, 34 49" fill="#ff8844" opacity="0.9" />
+                    <path d="M28 49 C28 49, 30 55, 30 55 C30 52, 32 49, 32 49" fill="#ffcc44" opacity="0.9" />
+                  </g>
                 </g>
               </g>
             </g>
