@@ -3106,7 +3106,7 @@
     display: none;
   }
 
-  /* Hero copy wrapper: natural content height, zero extra space, no unwanted transforms */
+  /* Hero copy wrapper: natural content height, horizontal inset for mobile breathing room */
   .home-hero-copy,
   .home-hero > :first-child {
     width: 100% !important;
@@ -3116,7 +3116,7 @@
     min-height: 0 !important;
     flex: 0 0 auto !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 8px !important;
     box-sizing: border-box;
     display: flex !important;
     flex-direction: column !important;
