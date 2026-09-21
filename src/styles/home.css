@@ -2988,9 +2988,13 @@
     gap: 35px;
   }
 
+  .home-about-section {
+    padding: 70px clamp(24px, 4vw, 36px);
+  }
+
   .home-about-section::before {
-    left: 0;
-    right: 0;
+    inset: 0;
+    border-radius: 28px;
   }
 
   .about-identity-card {
@@ -3075,18 +3079,25 @@
     display: none;
   }
 
-  /* Issue 2: Hero portrait + both orbital rings must be fully visible */
+  /* Hero portrait + both orbital rings fully inside viewport with comfortable breathing room */
   .hero-art {
     margin: 0 auto;
-    height: auto;
-    min-height: clamp(360px, 90vw, 500px);
-    max-width: 100%;
-    overflow: visible;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
+    overflow: visible;
+    --hero-scale: clamp(0.42, calc((100vw - 44px) / 620), 0.72);
+    height: calc(520px * var(--hero-scale));
+    min-height: calc(520px * var(--hero-scale));
   }
 
   .hero-orbital-stage {
-    transform: scale(clamp(0.55, calc((100vw - 24px) / 600), 0.78));
+    width: 600px;
+    height: 520px;
+    max-width: none;
+    transform: scale(var(--hero-scale));
     transform-origin: center center;
     flex-shrink: 0;
   }
@@ -3119,10 +3130,18 @@
     font-size: 10.5px;
   }
 
-  /* Issue 3 & 4: About section — content must sit cleanly inside purple border */
+  /* About section — generous internal breathing space so content never collides with purple border */
   .home-about-section {
-    padding-top: 56px;
-    padding-bottom: 48px;
+    padding: 48px clamp(18px, 5vw, 26px);
+  }
+
+  .home-about-section::before {
+    inset: 0;
+    border-radius: 24px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .about-statements {
@@ -3214,9 +3233,9 @@
     inset: auto;
     width: calc(100% + 32px);
     margin-left: -16px;
-    height: 240px;
-    margin-top: -10px;
-    margin-bottom: 10px;
+    height: clamp(140px, 35vw, 180px);
+    margin-top: -6px;
+    margin-bottom: 6px;
     overflow: visible;
     pointer-events: none;
   }
@@ -3322,14 +3341,7 @@
     font-size: 10.5px;
   }
 
-  /* Issue 3: Purple border must not overlap content — give it negative inset */
-  .home-about-section::before {
-    left: -6px;
-    right: -6px;
-    border-radius: 18px;
-    top: 10px;
-    bottom: 10px;
-  }
+
 
   .contact-panel {
     padding: 24px 16px;

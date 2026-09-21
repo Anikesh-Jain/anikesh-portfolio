@@ -11,17 +11,28 @@ const milestoneIcons = {
 
 const SESSION_KEY = 'portfolio_journey_completed'
 
+// Check if returning to route within an active session vs fresh full-page load/reload
+function checkIsCompleted() {
+  try {
+    if (typeof performance !== 'undefined') {
+      const navEntries = performance.getEntriesByType('navigation')
+      if (navEntries.length > 0 && navEntries[0].type === 'reload') {
+        sessionStorage.removeItem(SESSION_KEY)
+        return false
+      }
+    }
+    return sessionStorage.getItem(SESSION_KEY) === 'true'
+  } catch {
+    return false
+  }
+}
+
 export default function JourneySection() {
   const sectionRef = useRef(null)
+  const animRef = useRef(null)
 
   // Session-level persistence: check if Journey animation has already played in this browser session
-  const [isCompleted, setIsCompleted] = useState(() => {
-    try {
-      return sessionStorage.getItem(SESSION_KEY) === 'true'
-    } catch {
-      return false
-    }
-  })
+  const [isCompleted, setIsCompleted] = useState(checkIsCompleted)
   const [hasTriggered, setHasTriggered] = useState(isCompleted)
 
   useEffect(() => {
@@ -35,21 +46,39 @@ export default function JourneySection() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setHasTriggered(true)
-          try {
-            sessionStorage.setItem(SESSION_KEY, 'true')
-          } catch {
-            // ignore storage errors
+          // Check for reduced-motion preference
+          const prefersReducedMotion =
+            typeof window !== 'undefined' &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+          if (prefersReducedMotion) {
+            setHasTriggered(true)
+            setIsCompleted(true)
+            try {
+              sessionStorage.setItem(SESSION_KEY, 'true')
+            } catch {
+              // ignore
+            }
+            observer.disconnect()
+            return
           }
+
+          setHasTriggered(true)
+
           // After the flight duration (5.5s), lock permanently into static completed state
           timer = setTimeout(() => {
             setIsCompleted(true)
+            try {
+              sessionStorage.setItem(SESSION_KEY, 'true')
+            } catch {
+              // ignore storage errors
+            }
           }, 5500)
           observer.disconnect()
         }
       },
       {
-        threshold: 0.2
+        threshold: 0.15
       }
     )
 
@@ -59,6 +88,19 @@ export default function JourneySection() {
       if (timer) clearTimeout(timer)
     }
   }, [isCompleted])
+
+  // Trigger the SVG SMIL animation from t=0 immediately when section enters viewport
+  useEffect(() => {
+    if (hasTriggered && !isCompleted && animRef.current) {
+      try {
+        if (typeof animRef.current.beginElement === 'function') {
+          animRef.current.beginElement()
+        }
+      } catch {
+        // ignore fallback
+      }
+    }
+  }, [hasTriggered, isCompleted])
 
   return (
     <section id="journey" ref={sectionRef} className="section shell">
@@ -142,13 +184,15 @@ export default function JourneySection() {
           </defs>
 
           {/* Moving Rocket Ship — One-shot flight, then freezes permanently at destination */}
-          {hasTriggered && (
+          {(hasTriggered || isCompleted) && (
             <g
-              className="journey-rocket-mover"
+              className={`journey-rocket-mover ${hasTriggered && !isCompleted ? 'is-flying' : ''} ${isCompleted ? 'is-completed' : ''}`}
               {...(isCompleted ? { transform: 'translate(920, 58) rotate(-9.84)' } : {})}
             >
               {!isCompleted && (
                 <animateMotion
+                  ref={animRef}
+                  id="rocketFlightMotion"
                   dur="5.5s"
                   repeatCount="1"
                   fill="freeze"
@@ -156,13 +200,14 @@ export default function JourneySection() {
                   calcMode="spline"
                   keyTimes="0; 1"
                   keySplines="0.22 0.05 0.28 1"
+                  begin="indefinite"
                 >
-                  <mpath href="#rocketFlightTrajectory" />
+                  <mpath href="#rocketFlightTrajectory" xlinkHref="#rocketFlightTrajectory" />
                 </animateMotion>
               )}
 
-              {/* Rocket & streaming exhaust oriented so nose aligns with path tangent */}
-              <g transform="rotate(90) translate(-30, -30)">
+              {/* Rocket & streaming exhaust oriented so nose aligns with path tangent, scaled for clear visibility */}
+              <g transform="rotate(90) scale(1.65) translate(-30, -30)">
                 {/* Permanent Ambient Rocket Glow */}
                 <circle cx="30" cy="30" r="42" fill="url(#rocketGlowGrad)" />
 
