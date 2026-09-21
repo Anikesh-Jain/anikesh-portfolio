@@ -3085,9 +3085,9 @@
     flex-direction: column;
     align-items: center;
     min-height: auto;
-    gap: 24px;
-    padding-top: 24px;
-    padding-bottom: 40px;
+    gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 32px;
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -3106,15 +3106,62 @@
     display: none;
   }
 
-  /* Hero portrait + both orbital rings fully inside viewport as a complete responsive composition */
+  .home-hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-bottom: 6px;
+  }
+
+  /* Scaled Hero heading — natural mobile proportion instead of zoomed desktop */
+  .home-hero h1 {
+    font-size: clamp(34px, 9.2vw, 42px) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -2px !important;
+    margin: 12px 0 14px !important;
+  }
+
+  /* Scaled subtitle & buttons */
+  .home-subtitle {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: #9c9bb0;
+    max-width: 100%;
+  }
+
+  .actions {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .actions .btn {
+    flex: 1 1 130px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 11px;
+    gap: 8px;
+  }
+
+  .social-row {
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .social-row a {
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+
+  /* Hero portrait + orbit artwork: unified proportional visual system that breathes comfortably inside the phone */
   .hero-art {
-    --hero-scale: clamp(0.48, calc((100vw - 32px) / 600), 0.70);
+    --hero-scale: clamp(0.40, calc((100vw - 64px) / 600 * 0.85), 0.52);
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    height: calc(540px * var(--hero-scale));
-    min-height: calc(540px * var(--hero-scale));
-    margin: 16px auto 32px;
+    height: calc(520px * var(--hero-scale));
+    min-height: calc(520px * var(--hero-scale));
+    margin: 10px auto 20px;
     position: relative;
     display: flex;
     align-items: center;
@@ -3134,57 +3181,38 @@
     position: relative;
   }
 
-  .home-subtitle {
-    font-size: 14px;
-    line-height: 1.75;
-    margin-bottom: 24px;
-  }
-
-  .actions {
-    gap: 12px;
-    width: 100%;
-  }
-
-  .actions .btn {
-    flex: 1 1 140px;
-    justify-content: center;
-    text-align: center;
-    padding: 12px 14px;
-    font-size: 11.5px;
-  }
-
-  .social-row {
-    gap: 6px;
-  }
-
-  .social-row a {
-    padding: 7px 10px;
-    font-size: 10.5px;
-  }
-
-  /* About section — clean separation, strict width calculations & no horizontal overflow */
+  /* About section — clean intentional panel container aligned with shell gutters */
   .home-about-section {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: min(1380px, calc(100% - 32px)) !important;
+    max-width: calc(100% - 32px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 24px 16px 26px;
     box-sizing: border-box !important;
-    margin-top: 36px;
-    padding: 36px clamp(14px, 4vw, 22px) 40px;
     position: relative;
     z-index: 1;
-    overflow-x: clip;
+    border-radius: 20px;
   }
 
   .home-about-section::before {
+    content: "";
     position: absolute;
+    inset: 0 !important;
     top: 0 !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    inset: 0 !important;
-    border-radius: 24px;
     width: 100% !important;
-    max-width: 100% !important;
+    height: 100% !important;
     box-sizing: border-box !important;
+    border-radius: 20px;
+    border: 1px solid rgba(177, 108, 255, 0.22);
+    background: linear-gradient(115deg, rgba(111, 54, 172, 0.24), rgba(61, 31, 103, 0.16) 52%, rgba(83, 54, 156, 0.20));
+    box-shadow: 0 16px 48px rgba(43, 18, 74, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .home-about-layout {
@@ -3194,7 +3222,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 22px;
   }
 
   .home-about-copy {
@@ -3204,10 +3232,17 @@
     box-sizing: border-box;
   }
 
+  .home-about-copy .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-bottom: 4px;
+  }
+
   .home-about-copy h2 {
-    font-size: clamp(26px, 7vw, 36px);
-    letter-spacing: -1.2px;
-    line-height: 1.15;
+    font-size: clamp(22px, 6vw, 28px) !important;
+    letter-spacing: -1px !important;
+    line-height: 1.18 !important;
+    margin: 10px 0 12px !important;
     overflow-wrap: break-word;
     word-break: break-word;
     width: 100%;
@@ -3217,6 +3252,9 @@
   }
 
   .home-about-copy p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #9a98aa;
     overflow-wrap: break-word;
     width: 100%;
     max-width: 100%;
@@ -3227,8 +3265,8 @@
   .about-statements {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-top: 22px;
+    gap: 10px;
+    margin-top: 18px;
     width: 100%;
     max-width: 100%;
     min-width: 0;
@@ -3236,7 +3274,8 @@
   }
 
   .about-statement {
-    padding: 16px 14px 18px;
+    padding: 14px 14px 15px;
+    border-radius: 12px;
     width: 100%;
     max-width: 100%;
     min-width: 0;
@@ -3245,27 +3284,43 @@
     z-index: 2;
   }
 
+  .about-statement b {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .about-statement span {
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+
+  .statement-icon-box {
+    margin-bottom: 10px;
+  }
+
   .about-identity-card {
     min-height: auto;
-    padding: 20px 12px 18px;
+    padding: 16px 12px 14px;
+    border-radius: 16px;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
+    margin-top: 6px;
   }
 
   .mern-system-wrapper {
-    --mern-scale: clamp(0.68, calc((100vw - 84px) / 300), 0.85);
+    --mern-scale: clamp(0.58, calc((100vw - 120px) / 300 * 0.72), 0.70);
     width: 300px;
     height: 300px;
     transform: scale(var(--mern-scale));
     transform-origin: center center;
     margin-left: calc((100% - 300px) / 2);
     margin-right: calc((100% - 300px) / 2);
-    margin-top: calc((300px * (var(--mern-scale) - 1)) / 2 + 8px);
-    margin-bottom: calc((300px * (var(--mern-scale) - 1)) / 2 + 8px);
+    margin-top: calc((300px * (var(--mern-scale) - 1)) / 2 + 4px);
+    margin-bottom: calc((300px * (var(--mern-scale) - 1)) / 2 + 4px);
     min-width: 0;
     flex-shrink: 0;
   }
@@ -3282,9 +3337,9 @@
   }
 
   .concept-badge {
-    padding: 5px 9px;
-    font-size: 10.5px;
-    gap: 5px;
+    padding: 4px 8px;
+    font-size: 10px;
+    gap: 4px;
     white-space: nowrap;
     min-width: 0;
     flex-shrink: 0;
@@ -3292,8 +3347,8 @@
   }
 
   .identity-caption {
-    font-size: 11px;
-    margin-top: 6px;
+    font-size: 10.5px;
+    margin-top: 4px;
     text-align: center;
     width: 100%;
     max-width: 100%;
