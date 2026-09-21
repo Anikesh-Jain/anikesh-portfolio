@@ -3073,11 +3073,12 @@
 }
 
 @media (max-width: 640px) {
-  /* Issue 1: Hero eyebrow needs breathing room below fixed navbar */
+  /* Hero section mobile containment — artwork fully contained, no leak into About */
   .home-hero {
+    min-height: auto;
     gap: 20px;
     padding-top: 24px;
-    padding-bottom: 10px;
+    padding-bottom: 32px;
   }
 
   .home-hero::after {
@@ -3086,10 +3087,11 @@
 
   /* Hero portrait + both orbital rings fully inside viewport as a complete responsive composition */
   .hero-art {
-    --hero-scale: clamp(0.46, calc((100vw - 36px) / 600), 0.72);
-    margin: 10px auto 0;
+    --hero-scale: clamp(0.44, calc((100vw - 44px) / 600), 0.70);
+    margin: 12px auto 24px;
     width: calc(600px * var(--hero-scale));
     height: calc(520px * var(--hero-scale));
+    max-width: 100%;
     position: relative;
     overflow: visible;
     display: block;
@@ -3135,9 +3137,14 @@
     font-size: 10.5px;
   }
 
-  /* About section — generous internal breathing space so content never collides with purple border */
+  /* About section — clean separation, strict width calculations & no horizontal overflow */
   .home-about-section {
+    margin-top: 24px;
     padding: 44px clamp(14px, 4vw, 22px);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
   }
 
   .home-about-section::before {
@@ -3149,35 +3156,76 @@
     right: 0;
   }
 
+  .home-about-layout {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    gap: 28px;
+  }
+
+  .home-about-copy {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .home-about-copy h2 {
+    font-size: clamp(28px, 7.5vw, 40px);
+    letter-spacing: -1.5px;
+    line-height: 1.12;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .home-about-copy p {
+    overflow-wrap: break-word;
+  }
+
   .about-statements {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-top: 24px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .about-statement {
     padding: 18px 16px 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
     z-index: 2;
   }
 
   .about-identity-card {
     min-height: auto;
     padding: 22px 14px 18px;
+    width: 100%;
     max-width: 100%;
-    overflow: visible;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
   }
 
   .mern-system-wrapper {
-    --mern-scale: clamp(0.70, calc((100vw - 84px) / 320), 0.85);
+    --mern-scale: clamp(0.72, calc((100vw - 96px) / 300), 0.85);
     width: 300px;
     height: 300px;
     transform: scale(var(--mern-scale));
     transform-origin: center center;
-    margin: calc((300px * (var(--mern-scale) - 1)) / 2 + 10px) auto;
+    margin-left: calc((100% - 300px) / 2);
+    margin-right: calc((100% - 300px) / 2);
+    margin-top: calc((300px * (var(--mern-scale) - 1)) / 2 + 10px);
+    margin-bottom: calc((300px * (var(--mern-scale) - 1)) / 2 + 10px);
+    flex-shrink: 0;
   }
 
   .concept-row {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 0 4px;
   }
 
@@ -3185,12 +3233,18 @@
     padding: 6px 10px;
     font-size: 11px;
     gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .identity-caption {
     font-size: 11px;
     margin-top: 6px;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
   }
 
   /* Skills mobile — 2-column for language items */
