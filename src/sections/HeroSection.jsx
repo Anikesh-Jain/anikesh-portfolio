@@ -6,7 +6,7 @@ import { trackGithubClick, trackSocialClick, trackContactClick } from '../utils/
 
 export default function HeroSection() {
   return (
-    <section id="home" className="home-hero shell pt-8 pb-16 sm:pb-24">
+    <section id="home" className="home-hero shell md:pt-8 md:pb-16 lg:pb-24">
       {/* Left Column - Copy */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -19,7 +19,7 @@ export default function HeroSection() {
           {siteConfig.eyebrow}
         </p>
 
-        <h1 className="text-[clamp(64px,7vw,100px)] font-extrabold leading-[0.88] tracking-[-5px] my-[22px] text-foreground">
+        <h1 className="text-[clamp(64px,7vw,100px)] font-extrabold leading-[0.88] tracking-[-5px] text-foreground md:my-[22px]">
           Hi, I'm<br />
           <span className="gradient">{siteConfig.name}</span>
         </h1>

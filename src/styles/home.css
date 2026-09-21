@@ -3079,15 +3079,17 @@
 }
 
 @media (max-width: 640px) {
-  /* Hero section mobile containment — artwork fully contained in normal flow, strictly separated from About */
+  /* Hero section mobile containment — natural content height in normal flow, strictly separated from About */
   .home-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: auto;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    min-height: 0 !important;
+    height: auto !important;
     gap: 16px;
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -3099,7 +3101,7 @@
     display: none;
   }
 
-  /* Hero copy wrapper: explicit mobile control for vertical rhythm (eyebrow ↓ heading ↓ subtitle ↓ buttons ↓ social row) */
+  /* Hero copy wrapper: natural content height, zero extra space, no unwanted transforms */
   .home-hero-copy,
   .home-hero > :first-child {
     width: 100%;
@@ -3107,10 +3109,15 @@
     min-width: 0;
     margin: 0;
     padding: 0;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 0 0 auto !important;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
+    transform: none !important;
   }
 
   .home-hero-copy .eyebrow,
@@ -3184,13 +3191,13 @@
 
   /* Hero portrait + orbit artwork: unified proportional visual system that breathes comfortably inside the phone */
   .hero-art {
-    --hero-scale: 0.52;
+    --hero-scale: 0.56;
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    height: calc(520px * 0.52);
-    min-height: calc(520px * 0.52);
-    margin: 6px auto 16px;
+    height: calc(520px * 0.56);
+    min-height: calc(520px * 0.56);
+    margin: 0 auto;
     position: relative;
     display: flex;
     align-items: center;
@@ -3203,8 +3210,8 @@
     width: 600px;
     height: 520px;
     max-width: none;
-    transform: scale(0.52) !important;
-    transform: scale(var(--hero-scale, 0.52)) !important;
+    transform: scale(0.56) !important;
+    transform: scale(var(--hero-scale, 0.56)) !important;
     transform-origin: center center;
     flex-shrink: 0;
     margin: 0 auto;
@@ -3601,27 +3608,27 @@
 /* ─── Mobile Phone Responsive Hero Artwork Scaling ─── */
 @media (max-width: 480px) {
   .hero-art {
-    --hero-scale: 0.50;
-    height: calc(520px * 0.50);
-    min-height: calc(520px * 0.50);
+    --hero-scale: 0.55;
+    height: calc(520px * 0.55);
+    min-height: calc(520px * 0.55);
   }
 
   .hero-orbital-stage {
-    transform: scale(0.50) !important;
-    transform: scale(var(--hero-scale, 0.50)) !important;
+    transform: scale(0.55) !important;
+    transform: scale(var(--hero-scale, 0.55)) !important;
   }
 }
 
 @media (max-width: 360px) {
   .hero-art {
-    --hero-scale: 0.45;
-    height: calc(520px * 0.45);
-    min-height: calc(520px * 0.45);
+    --hero-scale: 0.48;
+    height: calc(520px * 0.48);
+    min-height: calc(520px * 0.48);
   }
 
   .hero-orbital-stage {
-    transform: scale(0.45) !important;
-    transform: scale(var(--hero-scale, 0.45)) !important;
+    transform: scale(0.48) !important;
+    transform: scale(var(--hero-scale, 0.48)) !important;
   }
 }
 
