@@ -19,7 +19,7 @@ export default function HeroSection() {
           {siteConfig.eyebrow}
         </p>
 
-        <h1 className="text-[clamp(64px,7vw,100px)] font-extrabold leading-[0.88] tracking-[-5px] text-foreground md:my-[22px]">
+        <h1 className="font-extrabold text-foreground md:text-[clamp(64px,7vw,100px)] md:leading-[0.88] md:tracking-[-5px] md:my-[22px]">
           Hi, I'm<br />
           <span className="gradient">{siteConfig.name}</span>
         </h1>
