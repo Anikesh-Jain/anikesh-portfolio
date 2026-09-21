@@ -3155,13 +3155,13 @@
 
   /* Hero portrait + orbit artwork: unified proportional visual system that breathes comfortably inside the phone */
   .hero-art {
-    --hero-scale: clamp(0.40, calc((100vw - 64px) / 600 * 0.85), 0.52);
+    --hero-scale: clamp(0.34, calc((100vw - 64px) / 600 * 0.64), 0.42);
     width: 100%;
     max-width: 100%;
     min-width: 0;
     height: calc(520px * var(--hero-scale));
     min-height: calc(520px * var(--hero-scale));
-    margin: 10px auto 20px;
+    margin: 8px auto 16px;
     position: relative;
     display: flex;
     align-items: center;
