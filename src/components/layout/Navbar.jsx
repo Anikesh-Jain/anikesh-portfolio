@@ -111,10 +111,28 @@ export default function Navbar() {
     e.preventDefault()
     closeMobileMenu()
     setActiveSection(targetId)
-    const el = document.getElementById(targetId)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
+
+    // Small delay lets the mobile menu drawer close before scrolling
+    const scrollToTarget = () => {
+      if (targetId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const el = document.getElementById(targetId)
+        if (el) {
+          // Offset for fixed navbar (78px) + 16px breathing room
+          const offset = 94
+          const top = el.getBoundingClientRect().top + window.scrollY - offset
+          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+        }
+      }
       window.history.replaceState(null, '', `#${targetId}`)
+    }
+
+    // If mobile menu was open, wait for its exit animation
+    if (mobileMenuOpen) {
+      setTimeout(scrollToTarget, 250)
+    } else {
+      scrollToTarget()
     }
   }
 

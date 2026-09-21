@@ -2972,7 +2972,8 @@
     align-items: center;
     margin: 10px auto 0;
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
+    height: auto;
   }
 
   .hero-orbital-stage {
@@ -3064,25 +3065,35 @@
 
 @media (max-width: 640px) {
   .home-hero {
-    gap: 28px;
+    gap: 20px;
+    padding-top: 4px;
+    padding-bottom: 10px;
   }
 
   .home-hero::after {
     display: none;
   }
 
+  /* Hero art: let portrait + orbit be fully visible */
   .hero-art {
     margin: 0 auto;
-    height: clamp(330px, 80vw, 440px);
+    height: auto;
+    min-height: clamp(340px, 85vw, 460px);
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
   }
 
   .hero-orbital-stage {
-    transform: scale(clamp(0.46, calc((100vw - 36px) / 620), 0.68));
+    transform: scale(clamp(0.50, calc((100vw - 36px) / 620), 0.72));
     transform-origin: center center;
     flex-shrink: 0;
+  }
+
+  .home-subtitle {
+    font-size: 14px;
+    line-height: 1.75;
+    margin-bottom: 24px;
   }
 
   .actions {
@@ -3094,6 +3105,8 @@
     flex: 1 1 140px;
     justify-content: center;
     text-align: center;
+    padding: 12px 14px;
+    font-size: 11.5px;
   }
 
   .social-row {
@@ -3105,9 +3118,19 @@
     font-size: 10.5px;
   }
 
+  /* About mobile */
+  .home-about-section {
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
+
   .about-statements {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+
+  .about-statement {
+    padding: 18px 16px 20px;
   }
 
   .about-identity-card {
@@ -3134,14 +3157,35 @@
     gap: 5px;
   }
 
+  /* Skills mobile — 2-column for language items */
   .home-tech-item {
     touch-action: pan-y;
+    gap: 10px;
+    padding: 10px 12px;
+    min-height: 62px;
+  }
+
+  .home-tech-item i {
+    width: 28px;
+    font-size: 24px;
+  }
+
+  .tech-logo {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
   }
 
   .home-tech-items {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
+  .home-tech-group {
+    padding: 20px 16px;
+  }
+
+  /* Projects mobile */
   .projects {
     grid-template-columns: 1fr;
   }
@@ -3150,11 +3194,11 @@
     height: clamp(200px, 56vw, 260px);
   }
 
-  /* Journey mobile */
+  /* Journey mobile — rocket must be visible */
   .journey-container {
     padding: 24px 16px 28px;
     min-height: auto;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .journey-title {
@@ -3166,9 +3210,9 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: 130px;
+    height: 160px;
     margin: -10px 0 10px;
-    overflow: hidden;
+    overflow: visible;
     pointer-events: none;
   }
 
@@ -3245,7 +3289,7 @@
   }
 
   .explore-card {
-    padding: 28px 18px 24px;
+    padding: 24px 16px 20px;
   }
 
   .home-about-section::before {
