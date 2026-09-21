@@ -3087,16 +3087,19 @@
     min-height: auto;
     gap: 24px;
     padding-top: 24px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
     position: relative;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    overflow-x: clip;
   }
 
   .home-hero > :first-child {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .home-hero::after {
@@ -3105,12 +3108,13 @@
 
   /* Hero portrait + both orbital rings fully inside viewport as a complete responsive composition */
   .hero-art {
-    --hero-scale: clamp(0.50, calc((100vw - 32px) / 600), 0.70);
-    margin: 16px auto 36px;
-    width: calc(600px * var(--hero-scale));
-    height: calc(560px * var(--hero-scale));
-    min-height: calc(560px * var(--hero-scale));
+    --hero-scale: clamp(0.48, calc((100vw - 32px) / 600), 0.70);
+    width: 100%;
     max-width: 100%;
+    min-width: 0;
+    height: calc(540px * var(--hero-scale));
+    min-height: calc(540px * var(--hero-scale));
+    margin: 16px auto 32px;
     position: relative;
     display: flex;
     align-items: center;
@@ -3120,15 +3124,14 @@
   }
 
   .hero-orbital-stage {
-    position: absolute;
-    left: 50%;
-    top: 50%;
     width: 600px;
     height: 520px;
     max-width: none;
-    transform: translate(-50%, -50%) scale(var(--hero-scale));
+    transform: scale(var(--hero-scale));
     transform-origin: center center;
     flex-shrink: 0;
+    margin: 0 auto;
+    position: relative;
   }
 
   .home-subtitle {
@@ -3161,63 +3164,82 @@
 
   /* About section — clean separation, strict width calculations & no horizontal overflow */
   .home-about-section {
-    margin-top: 32px;
-    padding: 44px clamp(14px, 4vw, 22px);
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: clip;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 36px;
+    padding: 36px clamp(14px, 4vw, 22px) 40px;
     position: relative;
     z-index: 1;
+    overflow-x: clip;
   }
 
   .home-about-section::before {
-    inset: 0;
+    position: absolute;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    inset: 0 !important;
     border-radius: 24px;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .home-about-layout {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     gap: 28px;
   }
 
   .home-about-copy {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
   }
 
   .home-about-copy h2 {
-    font-size: clamp(28px, 7.5vw, 40px);
-    letter-spacing: -1.5px;
-    line-height: 1.12;
+    font-size: clamp(26px, 7vw, 36px);
+    letter-spacing: -1.2px;
+    line-height: 1.15;
     overflow-wrap: break-word;
     word-break: break-word;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .home-about-copy p {
     overflow-wrap: break-word;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .about-statements {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 22px;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
   }
 
   .about-statement {
-    padding: 18px 16px 20px;
+    padding: 16px 14px 18px;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
     overflow-wrap: break-word;
     z-index: 2;
@@ -3225,40 +3247,48 @@
 
   .about-identity-card {
     min-height: auto;
-    padding: 22px 14px 18px;
+    padding: 20px 12px 18px;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
   }
 
   .mern-system-wrapper {
-    --mern-scale: clamp(0.72, calc((100vw - 96px) / 300), 0.85);
+    --mern-scale: clamp(0.68, calc((100vw - 84px) / 300), 0.85);
     width: 300px;
     height: 300px;
     transform: scale(var(--mern-scale));
     transform-origin: center center;
     margin-left: calc((100% - 300px) / 2);
     margin-right: calc((100% - 300px) / 2);
-    margin-top: calc((300px * (var(--mern-scale) - 1)) / 2 + 10px);
-    margin-bottom: calc((300px * (var(--mern-scale) - 1)) / 2 + 10px);
+    margin-top: calc((300px * (var(--mern-scale) - 1)) / 2 + 8px);
+    margin-bottom: calc((300px * (var(--mern-scale) - 1)) / 2 + 8px);
+    min-width: 0;
     flex-shrink: 0;
   }
 
   .concept-row {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
     padding: 0 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .concept-badge {
-    padding: 6px 10px;
-    font-size: 11px;
-    gap: 6px;
+    padding: 5px 9px;
+    font-size: 10.5px;
+    gap: 5px;
     white-space: nowrap;
+    min-width: 0;
     flex-shrink: 0;
+    box-sizing: border-box;
   }
 
   .identity-caption {
@@ -3267,6 +3297,7 @@
     text-align: center;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
     overflow-wrap: break-word;
   }
