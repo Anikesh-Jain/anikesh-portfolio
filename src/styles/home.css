@@ -528,6 +528,12 @@
   will-change: box-shadow;
 }
 
+.hero-portrait-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 @keyframes portrait-glow-pulse {
   0% {
     border-color: #a855f7;
@@ -3073,12 +3079,24 @@
 }
 
 @media (max-width: 640px) {
-  /* Hero section mobile containment — artwork fully contained, no leak into About */
+  /* Hero section mobile containment — artwork fully contained in normal flow, strictly separated from About */
   .home-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: auto;
-    gap: 20px;
+    gap: 24px;
     padding-top: 24px;
-    padding-bottom: 32px;
+    padding-bottom: 50px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .home-hero > :first-child {
+    width: 100%;
+    max-width: 100%;
   }
 
   .home-hero::after {
@@ -3087,14 +3105,18 @@
 
   /* Hero portrait + both orbital rings fully inside viewport as a complete responsive composition */
   .hero-art {
-    --hero-scale: clamp(0.44, calc((100vw - 44px) / 600), 0.70);
-    margin: 12px auto 24px;
+    --hero-scale: clamp(0.50, calc((100vw - 32px) / 600), 0.70);
+    margin: 16px auto 36px;
     width: calc(600px * var(--hero-scale));
-    height: calc(520px * var(--hero-scale));
+    height: calc(560px * var(--hero-scale));
+    min-height: calc(560px * var(--hero-scale));
     max-width: 100%;
     position: relative;
-    overflow: visible;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-shrink: 0;
   }
 
   .hero-orbital-stage {
@@ -3139,12 +3161,14 @@
 
   /* About section — clean separation, strict width calculations & no horizontal overflow */
   .home-about-section {
-    margin-top: 24px;
+    margin-top: 32px;
     padding: 44px clamp(14px, 4vw, 22px);
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: clip;
+    position: relative;
+    z-index: 1;
   }
 
   .home-about-section::before {

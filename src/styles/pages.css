@@ -701,7 +701,7 @@
 
 @media (max-width: 680px) {
   .experience-block {
-    padding: 22px;
+    padding: 20px 14px;
   }
   .experience-heading {
     flex-direction: column;
@@ -716,15 +716,20 @@
   }
   .experience-gallery-four,
   .experience-gallery-two {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
   .experience-media button.media-btn,
   .experience-media a {
-    height: 300px;
+    height: clamp(140px, 38vw, 185px);
   }
   .experience-media.document button.media-btn,
   .experience-media.document a {
-    height: 360px;
+    height: clamp(170px, 46vw, 220px);
+  }
+  .experience-media figcaption {
+    padding: 8px 10px;
+    font-size: 9.5px;
   }
 }
 
