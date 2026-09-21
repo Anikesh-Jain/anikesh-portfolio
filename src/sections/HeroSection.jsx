@@ -9,8 +9,8 @@ export default function HeroSection() {
     <section id="home" className="home-hero shell md:pt-8 md:pb-16 lg:pb-24">
       {/* Left Column - Copy */}
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="home-hero-copy"
       >
