@@ -1,10 +1,10 @@
 # 🚀 Anikesh Jain — Developer Portfolio
 
-> A modern, futuristic personal portfolio showcasing full-stack web development, MERN-stack skills, projects, creative work, certifications, achievements, and technical involvement.
+> A modern, futuristic personal portfolio showcasing full-stack web development, projects, creative work, certifications, achievements, technical involvement, and personal growth.
 
 ## 🌐 Live Portfolio
 
-**[Visit Portfolio](YOUR_LIVE_PORTFOLIO_URL)**
+**[Visit Portfolio](https://anikesh-portfolio-seven.vercel.app/)**
 
 ---
 
@@ -15,12 +15,11 @@ This portfolio is built as a complete personal portfolio experience rather than 
 It brings together:
 
 - Full-stack web development
-- MERN-stack skills
 - Real-world projects
-- Technical certifications
 - Creative and graphic design work
-- Achievements
-- Club and technical involvement
+- Technical certifications
+- Achievements and competition work
+- Technical and creative involvement
 - Personal learning journey
 
 ---
@@ -30,14 +29,15 @@ It brings together:
 ### 🏠 Personal Portfolio
 - Futuristic developer-focused homepage
 - Interactive hero visual
-- About and skills sections
-- Featured projects
+- About and featured content
 - Personal development journey
+- Responsive layouts and smooth interactions
 
 ### 💻 Projects
-Dedicated project pages with project overview, features, technology stack, technical details, screenshots, live demos, GitHub repositories, and case studies.
+Dedicated project pages with project overview, features, technology stack, technical details, screenshots, live demos, GitHub repositories, and case-study style information.
 
 Featured projects:
+
 - **Aura Store** — Full-stack e-commerce platform
 - **SmartExpense** — Personal finance and savings platform
 
@@ -59,33 +59,53 @@ Dedicated section for awards, competitions, and accomplishments.
 Showcases technical and creative involvement across CSI, Yavanika, Spectra, and other technical/community activities.
 
 ### 📊 Private Analytics
-Integrated with **Vercel Web Analytics** for private portfolio usage and engagement tracking.
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- React 19
-- Vite
-- Tailwind CSS v4
-- Framer Motion
-- React Router
-- Lucide React
-
-### Development & Tooling
-- JavaScript
-- Git
-- GitHub
-- Oxlint
-- Vercel
-- Vercel Web Analytics
+Integrated with **Vercel Web Analytics** for portfolio usage and engagement tracking.
 
 ---
 
 ## 🎨 Design
 
 The portfolio follows a futuristic **dark cosmic / neon** visual direction with glassmorphism, neon borders, ambient glows, cosmic backgrounds, animated particles, responsive layouts, micro-interactions, and smooth animations.
+
+---
+
+## 📸 Portfolio Screenshots
+
+### Homepage
+![Portfolio Homepage](docs/screenshots/01-homepage.png)
+
+### About
+![About](docs/screenshots/02-about.png)
+
+### Skills & Technologies
+![Skills](docs/screenshots/03-skills.png)
+
+### Featured Projects
+![Projects](docs/screenshots/04-projects.png)
+
+### Journey — Growth
+![Journey Growth](docs/screenshots/05-journey-growth.png)
+
+### Journey — Explore
+![Journey Explore](docs/screenshots/06-journey-explore.png)
+
+### Connect
+![Connect](docs/screenshots/07-connect.png)
+
+### Footer
+![Footer](docs/screenshots/08-footer.png)
+
+### Achievements
+![Achievements](docs/screenshots/09-achievements.png)
+
+### Certificates
+![Certificates](docs/screenshots/10-certificates.png)
+
+### Creative Archive
+![Creative Archive](docs/screenshots/11-creative.png)
+
+### Technical & Creative Involvement
+![Involvement](docs/screenshots/12-involvement.png)
 
 ---
 
@@ -125,6 +145,9 @@ Portfolio/
 │   ├── sections/
 │   ├── styles/
 │   └── utils/
+│
+├── docs/
+│   └── screenshots/
 │
 ├── index.html
 ├── package.json
@@ -185,17 +208,17 @@ Current status:
 
 ### Aura Store
 
-A production-style full-stack e-commerce platform.
+A production-style full-stack e-commerce platform built with Next.js, PostgreSQL, Prisma, authentication, Razorpay, Cloudinary, Resend, and modern UI tooling.
 
-**GitHub:** https://github.com/Anikesh-Jain/aurastore  
-**Live:** https://aurastore-nu.vercel.app
+- **GitHub:** https://github.com/Anikesh-Jain/aurastore
+- **Live:** https://aurastore-nu.vercel.app
 
 ### SmartExpense
 
 A full-stack personal finance platform focused on expense tracking, budgeting, savings goals, analytics, spending pace, multi-currency support, and financial planning.
 
-**GitHub:** https://github.com/Anikesh-Jain/smart-expense  
-**Live:** https://smart-expense-blond.vercel.app
+- **GitHub:** https://github.com/Anikesh-Jain/smart-expense
+- **Live:** https://smart-expense-blond.vercel.app
 
 ---
 
@@ -213,6 +236,7 @@ I enjoy turning ideas into practical, responsive web experiences and understandi
 
 - **GitHub:** https://github.com/Anikesh-Jain
 - **LinkedIn:** https://www.linkedin.com/in/anikeshjain/
+- **Portfolio:** https://anikesh-portfolio-seven.vercel.app/
 
 ---
 
